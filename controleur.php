@@ -3,9 +3,44 @@
 session_start();
 //Chemin racine de l'application
 define('PATHROOT',__DIR__);
+//Determine / ou \
 define('DS',DIRECTORY_SEPARATOR);
-define('PATHVIEWS', PATHROOT.DS.'vues'.DS);
+//Récupération de la page demandée en URL
+define('PATHVIEWS', PATHROOT.DS.'vues'.DS); /// vers les vues.
 
-$content ='hello projet mvc';
+//Constante vers les controlleurs
+define('PATHCTRL', PATHROOT.DS.'controllers'.DS);
 
+define('PATHMDL', PATHROOT.DS.'models'.DS); //Constant du chemin vers mes entités.
+
+
+include PATHMDL.'user.php';   // avant pck si on a pas mis en premier la classe user , la suite ne sera pas valide
+include PATHCTRL.'userController.php'; // des controleurs qui se trouvent dans user.php , il va venir charger automatiquement la classe user ( donc les méthodes comprises)
+
+
+$page = filter_input(INPUT_GET, 'page' , FILTER_SANITIZE_STRING);
+
+//récup d'une action
+$action=filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
+    if(!is_null($action)){
+        //Récupère la chaine demandée et la découpe pour récupérer le controleur et la méthode
+        //user-login
+        $tabAction= explode('-',$action);            //explode créé directement un tableau
+            $controller = $tabAction[0].'Controller';
+            //récup de la méthode à éxecuter
+                $method = $tabAction[1].'Action';
+              //Instanciation de l'objet
+                $objet = new $controller();
+               //Appel de la méthode 
+                $resAction = $objet->$method();
+                if($resAction) {
+                    $page=$resAction;
+                               }
+                         }
+//test si une page est demandée sinon affiche la page par défaut
+//vérifie également si la vue existe
+    if(is_null($page)|| !file_exists(PATHVIEWS.$page.'.php')){
+        $page = 'acceuil';
+                                                             }
+//affiche la vue
 include PATHVIEWS.'page.php';

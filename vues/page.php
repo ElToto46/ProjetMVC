@@ -1,6 +1,11 @@
 <?php
         include PATHVIEWS.'header.php';
-        echo $content;
+        
+        if(!empty($_SESSION['msgTxt'])) {
+            include PATHVIEWS.'flash.php';
+            $_SESSION['msgTxt']='';
+        }
+        include PATHVIEWS.$page.'.php';
+        
                 include PATHVIEWS.'footer.php';
                 
-                echo bonjour;
