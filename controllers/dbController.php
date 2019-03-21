@@ -11,14 +11,18 @@
  *
  * @author Ghost
  */
-class dbController {
+class dbController extends configController{
     private $bddserver ='127.0.0.1';
     private $bddname = '';
     private $bdduser = 'root';
     private $bddpassword = '';
     private $bdddriver= '';
     private $bddlink;
-    function __construct($config){ 
+    
+    
+    function __construct(){ 
+        parent::__construct();
+        $config = parent :: getConfigParameter('dbConfig');
 foreach ($config as $key=>$value){
     $method = 'set'.ucfirst($key);
     if(method_exists($this,$method)){
