@@ -4,16 +4,19 @@ p{
 body{
     background: white;
     text-align: center;
-    margin-right: 250px;
-        margin-left : 250px;
-        margin-bottom: 25px;
-        background-position: 250px 250px;
-        background-color: black;
+
 }
 p{
     background-color : white;
 }
 h1{
     background-color :white;
+}
+div_1{
+    
+}
+div{
+    margin-left: 300px;
+    margin-right: 300px;
 }
 

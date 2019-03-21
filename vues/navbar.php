@@ -3,7 +3,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
+  <div_1 class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
         <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
@@ -11,5 +11,6 @@
       <?php if(!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
           echo '<a class="nav-link" href="?page=login">Login</a>';
       }else{echo '<a class="nav-link" href="?action=user-logout">Logout</a>';}?>
-  </div>
+  </div_1>
 </nav>
+    

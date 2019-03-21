@@ -16,11 +16,27 @@ define('PATHMDL', PATHROOT.DS.'models'.DS); //Constant du chemin vers mes entit�
 // Récupérer les fichiers de configuration
 $config = yaml_parse_file(PATHROOT.DS.'conf'.DS.'parameters.yml');
 
-include PATHMDL.'user.php';   // avant pck si on a pas mis en premier la classe user , la suite ne sera pas valide
-include PATHCTRL.'userController.php'; // des controleurs qui se trouvent dans user.php , il va venir charger automatiquement la classe user ( donc les méthodes comprises)
-include PATHCTRL.'dbController.php';    //charge automatiquement la page dbController.php
+//include PATHMDL.'user.php';   // avant pck si on a pas mis en premier la classe user , la suite ne sera pas valide
+//include PATHCTRL.'userController.php'; // des controleurs qui se trouvent dans user.php , il va venir charger automatiquement la classe user ( donc les méthodes comprises)
+//include PATHCTRL.'dbController.php';    //charge automatiquement la page dbController.php
 
-$oBdd = new dbController($config['dbConfig']); 
+    function autoLoadModel($modelName){
+        if(file_exists(PATHMDL.$modelName.'.php')){
+            require_once PATHMDL.$modelName.'.php';
+        }
+    }
+    function autoLoadController($controllerName){
+        if(file_exists(PATHCTRL.$controllerName.'.php')){
+            require_once PATHCTRL.$controllerName.'.php';
+        }
+    }
+    
+    spl_autoload_register('autoLoadModel');
+        spl_autoload_register('autoLoadController');
+    
+    
+    
+//$oBdd = new dbController($config['dbConfig']); 
 
 $page = filter_input(INPUT_GET, 'page' , FILTER_SANITIZE_STRING);
 

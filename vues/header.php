@@ -19,6 +19,7 @@
                 margin-bottom: 50px;
             }
         </style>
-            
+        <div>
 <h1> GUTEN MORGEN </h1> 
 <p> Le cours PHP en objet va débuter </p>
+        </div>
