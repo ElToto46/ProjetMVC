@@ -27,6 +27,8 @@ class userController {
     function checkAction(user $user){
     return($user->getPassword() == 'toto')?TRUE:FALSE;
     }
+    
+    
     function logoutAction(){
         $_SESSION['connected']=false;
         session_destroy();

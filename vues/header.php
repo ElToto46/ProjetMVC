@@ -14,3 +14,4 @@
     include PATHVIEWS.'navbar.php';
     ?>
 <h1> guten morgen </h1> 
+<p> Le cours PHP en objet va débuter </p>

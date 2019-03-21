@@ -1,0 +1,7 @@
+#Configuration de la BDD
+dbConfig:
+    bddserver : 127.0.0.1
+    bdddriver: mysql
+    bdduser : thomas
+    bddpassword : adminadmin
+    bddname : BLOG
