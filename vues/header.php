@@ -13,5 +13,12 @@
         <?php
     include PATHVIEWS.'navbar.php';
     ?>
-<h1> guten morgen </h1> 
+        <style>
+            h1{
+                color:black;
+                margin-bottom: 50px;
+            }
+        </style>
+            
+<h1> GUTEN MORGEN </h1> 
 <p> Le cours PHP en objet va débuter </p>

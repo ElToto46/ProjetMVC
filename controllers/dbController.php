@@ -18,11 +18,17 @@ class dbController {
     private $bddpassword = '';
     private $bdddriver= '';
     private $bddlink;
-    function __construct(){         // APPELE EN PREMIER DANS  L APPEL DE DBCONTROLLER
-        $dsn = $this->bdddriver.':dbname='.$this->bdname.';host='.$this->bddserver;
+    function __construct($config){ 
+foreach ($config as $key=>$value){
+    $method = 'set'.ucfirst($key);
+    if(method_exists($this,$method)){
+    $this->$method($value);
+}
+}
+        $dsn = $this->bdddriver.':dbname='.$this->bddname.';host='.$this->bddserver;
         try {
             $this->bddlink = new PDO($dsn , $this->bdduser, $this->bddpassword);
-            $this->bddlink -> setAttribute(PDO::ATR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $this->bddlink -> setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
             echo 'Connection Failed:' . $e->getMessage();
         }

@@ -15,14 +15,12 @@ define('PATHMDL', PATHROOT.DS.'models'.DS); //Constant du chemin vers mes entit�
 
 // Récupérer les fichiers de configuration
 $config = yaml_parse_file(PATHROOT.DS.'conf'.DS.'parameters.yml');
-var_dump($config);
-die();
 
 include PATHMDL.'user.php';   // avant pck si on a pas mis en premier la classe user , la suite ne sera pas valide
 include PATHCTRL.'userController.php'; // des controleurs qui se trouvent dans user.php , il va venir charger automatiquement la classe user ( donc les méthodes comprises)
 include PATHCTRL.'dbController.php';    //charge automatiquement la page dbController.php
 
-$oBdd = new dbController(); 
+$oBdd = new dbController($config['dbConfig']); 
 
 $page = filter_input(INPUT_GET, 'page' , FILTER_SANITIZE_STRING);
 
