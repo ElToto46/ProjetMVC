@@ -4,6 +4,7 @@
 class user {
     private $login;
     private $password;
+    private $id;
     /* ALT+FN+INSERT*/
     function getLogin() {
         return $this->login;
@@ -12,8 +13,15 @@ class user {
     function getPassword() {
         return $this->password;
     }
+    function getId() {
+        return $this->id;
+    }
 
-    function setLogin($login) {
+    function setId($id) {
+        $this->id = $id;
+    }
+
+        function setLogin($login) {
         $this->login = $login;
     }
 

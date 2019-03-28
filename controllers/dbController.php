@@ -85,6 +85,47 @@ foreach ($config as $key=>$value){
     function setBddpassword($bddpassword) {
         $this->bddpassword = $bddpassword;
     }
-
-
+    
+    
+    
+    
+        function findOneBy(object $objet ,array $options=array()){ // $options est un paramètre
+        try{
+               $table=get_class($objet);  //récupère la classe de mon objet
+               $champs= '*';
+        if(isset($options['champs']) && !empty($options)){
+        $champs = implode(',',$options['champs']);
+        }
+        if(!isset($options['criteria'])){
+            throw new Exception(__METHOD__.' '.__LINE__.': criteria doit être défini');
+        }
+        $query = ' SELECT ' .$champs.' FROM '.$table.' WHERE ';
+        $nbCriteria = count(array_keys($options['criteria']));
+        $keys = array_keys($options['criteria']);
+        
+        for($i=0; $i<$nbCriteria; $i++){
+            if($i>0){
+                $query .= ' AND ';
+            }
+        $query .= $keys[$i].' = :'.$keys[$i];
+        }
+        $query .=' LIMIT 1 ';
+        $req = $this->bddlink->prepare($query);
+        $req -> execute($options['criteria']);
+        
+        $result = $req->fetch(PDO::FETCH_ASSOC);     //fetch et pas fetch_all car un seul enregirstrement à récup
+        return $result;
+        }
+        catch (Exception $ex){
+            echo $ex->getMessage();
+            return array();
+            }
+        }
+        function findOneById(object $object,$id){
+            return $this->findOneBy($object,
+                    array('criteria' 
+                        => array('id'=>$id)
+                        ));
+            //Penser à retourner un objet hehe
+        }
 }

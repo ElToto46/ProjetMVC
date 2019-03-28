@@ -3,11 +3,25 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/page.php</file>
-            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/www/index.php</file>
-            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/controleur.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/login.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/navbar.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/conf/parameters.yml</file>
             <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/www/css/style.css</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/README.md</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/controllers/configController.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/acceuil.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/.gitignore</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/page.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/models/user.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/willkommen.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/www/index.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/flash.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/controllers/dbController.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/logout.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/controleur.php</file>
             <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/header.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/controllers/userController.php</file>
+            <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/.gitattributes</file>
             <file>file:/C:/Users/Ghost/Documents/NetBeansProjects/ProjetMVC/vues/footer.php</file>
         </group>
     </open-files>

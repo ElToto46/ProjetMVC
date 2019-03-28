@@ -1,6 +1,7 @@
 <?php
 
 
+
 class userController {
     function loginAction(){
         $login= filter_input(INPUT_POST , 'login',FILTER_SANITIZE_EMAIL);
@@ -24,23 +25,52 @@ class userController {
                     $_SESSION['connected']= false;
         return $resultCheck;
     }
+    function createAction(){
+                   
+        $user = new user();
+        $oBdd = new dbController();
+
+        $userPost = array(
+                    'login' => FILTER_SANITIZE_EMAIL,
+                    'password' => FILTER_SANITIZE_ENCODED
+        );
+        $userTab = filter_input_array(INPUT_POST, $userPost);
+        $userTab['password'] = password_hash($userTab['password'],PASSWORD_BCRYPT);
+        
+        $id = $oBdd->newRecord($user,$userTab);
+        
+            if($id === 0) {
+                $_SESSION['msgStyle'] = 'danger';
+                $_SESSION['msgText'] = 'Erreur lors de la création de l\'utilisateur';
+                return 0;
+            }
+            $_SESSION['msgStyle'] = 'Success';
+                $_SESSION['msgText'] = 'Compte correctement créé';
+        return $id;
+    }
+}
+    //test les paramètres de connexion de l'user
     function checkAction(user $user){
       $oBdd = new dbController();
-      //
-        $query = 'SELECT password FROM user WHERE login = :login';//:login peut etre remplacé par "?"
-      $req = $oBdd->getBddlink()->prepare($query);
-      $req->execute(array(
-          'login'=>$user->getLogin()
-      ));
-      $tabUser = $req ->fetch(PDO::FETCH_ASSOC);
-      //
-      return (password_verify($user->getPassword(),$tabUser['password']))?true:false;
-    }
-    
-    
+ //       $tabUser = $oBdd->findOneById($user , 1);
+        $tabUser = $oBdd->findOneBy(
+                $user,
+                array(
+                    'champs'=>array('password'),
+                    //'login'
+                            'criteria'=>array(
+                                    'login'=>$user->getLogin(),
+                                    //'password'=>$user->getPassword(),
+                    ))
+                );
+        if(empty($tabUser)){
+        return false;}
+        return (password_verify($user->getPassword(),$tabUser['password']))?true:false;
+        }
+
     function logoutAction(){
         $_SESSION['connected']=false;
         session_destroy();
         return null;
     }
-}
+
