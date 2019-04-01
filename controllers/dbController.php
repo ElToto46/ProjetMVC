@@ -128,4 +128,90 @@ foreach ($config as $key=>$value){
                         ));
             //Penser à retourner un objet hehe
         }
-}
+        function newRecord(object $object, array $datas=array()){
+            try{
+                if(empty($datas)){
+            
+            throw new Exception(__METHOD__.' '.__LINE__.': datas...;');
+        }
+            $table = get_class($object);
+            
+            $rowColumns = '`'.implode('`,`',array_keys($datas)).'`';
+            $rowValues = ':'.implode(',:',array_keys($datas));
+
+            $reqNewRecord = 'INSERT_INTO '.$table.' ('.$rowColumns.') VALUES ';
+            $reqNewRecord .='('.$rowValues.')';
+            
+            $Enregistrement = $this->bddlink->prepare($reqNewRecord);
+            $Enregistrement->execute($datas);
+            
+            return $this->bddlink->lastInsertId();
+            }catch (Exception $ex){
+                echo $ex->getMessage();
+                return 0;
+            }   
+        }
+      /*  
+        function newUpdate(object $object, array $datas=array()){
+            try{
+                if(empty($datas)){
+            
+            throw new Exception(__METHOD__.' '.__LINE__.': datas...;');
+        }
+            $table = get_class($object);
+            
+            $rowColumns = '`'.implode('`,`',array_keys($datas)).'`';
+            $rowValues = ':'.implode(',:',array_keys($datas));
+
+            $reqNewUpdate = 'UPDATE '.$table.' ('.$rowColumns.') VALUES ';
+            $reqNewUpdate .='('.$rowValues.')';
+            
+            $Enregistrement = $this->bddlink->prepare($reqNewUpdate);
+            $Enregistrement->execute($datas);
+            
+             return $this->bddlink->lastInsertId();
+            }catch (Exception $ex){
+                echo $ex->getMessage();
+                return 0;
+            }   
+        
+         /*   
+          $stmt = $this->bddlink->prepare("UPDATE datadump SET content=? WHERE id=?");
+    $stmt->bind_param('si', $table, $id);
+    $stmt->execute();
+    return $stmt->affected_rows;
+  */
+
+            function findObjectById(object $object, $id){
+                    foreach ($id as $key => $vallue){
+                        $method = 'get'.ucfirst($key);
+                        if(method_exists($object, $method)){
+                            $object->$method($value)
+                                    ;
+                        }
+                    }
+                    }
+                            function hydrateRecord(object $object, array $datas) {
+        foreach ($datas as $key => $value) {
+            $method = 'set'.ucfirst($key);
+            if(method_exists($object, $method)){
+                $object->$method($value);   
+            }
+        }
+    }           //récupère les valeurs d'un tableau , parcours le tableau , regarde si une méthode existe sur un objet , si oui définit la valeur de l'objet
+                //avec la valeur du login , ppur ensuite etre réutilisé avec un getLogin
+            function findObjectById(object $object,$id){
+        $datas = $this->findOneById($object, $id);
+        $this->hydrateRecord($object, $datas);
+    }
+
+    function newRecord(object $object, array $datas=array()){
+
+    }
+
+    public function updateRecord(object $object, array $datas=array()) {
+
+    }
+            }
+
+            

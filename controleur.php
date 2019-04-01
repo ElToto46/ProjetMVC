@@ -53,8 +53,8 @@ $action=filter_input(INPUT_GET,'action',FILTER_SANITIZE_STRING);
                 $objet = new $controller();
                //Appel de la méthode 
                 $resAction = $objet->$method();
-                if($resAction) {
-                    $page=$resAction;
+                if(is_array($resAction)&& isset($resAction['view'])) {
+                    $page=$resAction['view'];
                                }
                          }
 //test si une page est demandée sinon affiche la page par défaut

@@ -1,29 +1,34 @@
 <?php
-
-
-
 class userController {
     function loginAction(){
         $login= filter_input(INPUT_POST , 'login',FILTER_SANITIZE_EMAIL);
         $password = filter_input(INPUT_POST, 'password' , FILTER_SANITIZE_SPECIAL_CHARS);
-       //         var_dump($password);
+        
+        
         $objUser = new user();
         $objUser->setLogin($login);
         $objUser->setPassword($password);
        
         $resultCheck = $this->checkAction($objUser);
-     //   die(var_dump($resultCheck));
-                
         if($resultCheck){
+            $oBdd = new dbController();
+            $user = $oBdd->findOneBy(
+            $objUser,
+                array(
+                    'champs'=> array(
+                        'id',
+                    ),
+                    'criteria'=> array(
+                        'login'=> $objUser->getLogin(),
+                    )
+                ));
+
             $_SESSION['msgStyle'] = 'success';
             $_SESSION['msgTxt'] = 'Vous êtes connecté';
             $_SESSION['connected']= true;
-            return 'willkommen';
+            $_SESSION['userid']= $user['id'];
+            return array ('view'=>'willkommen');
         }
-        $_SESSION['msgStyle'] = 'Danger';
-        $_SESSION['msgTxt'] = 'Erreur de login/mot de passe';
-                    $_SESSION['connected']= false;
-        return $resultCheck;
     }
     function createAction(){
                    
@@ -48,7 +53,8 @@ class userController {
                 $_SESSION['msgText'] = 'Compte correctement créé';
         return $id;
     }
-}
+
+
     //test les paramètres de connexion de l'user
     function checkAction(user $user){
       $oBdd = new dbController();
@@ -73,4 +79,10 @@ class userController {
         session_destroy();
         return null;
     }
-
+    function editAction(){
+        $oBdd = new dbController();
+        $user = new user();
+        $oBdd->findObjectById($user,$_SESSION['userid']);
+       return array('view'=>'edituser','user'=>$user );
+        }
+}

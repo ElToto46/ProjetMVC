@@ -10,7 +10,10 @@
       </li>
       <?php if(!isset($_SESSION['connected']) || $_SESSION['connected'] !== true) {
           echo '<a class="nav-link" href="?page=login">Login</a>';
-      }else{echo '<a class="nav-link" href="?action=user-logout">Logout</a>';}?>
+          echo '<a class="nav-item nav-link" href="?page=CreationCompte">S\'inscrire</a>';
+      }else{echo '<a class="nav-link" href="?action=user-logout">Logout</a>';
+      '<a class="nav-link" href="?action=ModifierCompte">Modifier le compte</a>';}?>
+      
   </div_1>
 </nav>
     
